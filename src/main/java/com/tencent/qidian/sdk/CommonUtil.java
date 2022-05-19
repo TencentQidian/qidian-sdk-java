@@ -136,24 +136,4 @@ public class CommonUtil {
         }
         return echoStr;
     }
-
-    /**
-     * 获取应用开发商token
-     *
-     * @param componentAppId        应用开发商appId
-     * @param componentAppSecret    应用开发商appSecret
-     * @param componentVerifyTicket 企点API后台推送的ticket，此ticket会定时推送
-     * @return component_access_token 应用开发商token expires_in 有效时长(s)
-     * @throws Exception 异常抛出外层处理
-     */
-    public JSONObject getComponentAccessToken(String componentAppId, String componentAppSecret,
-                                              String componentVerifyTicket) throws Exception {
-        JSONObject jsonParam = new JSONObject();
-        jsonParam.put("component_appid", componentAppId);
-        jsonParam.put("component_appsecret", componentAppSecret);
-        jsonParam.put("component_verify_ticket", componentVerifyTicket);
-        String result = new HttpClientUtil().sendHttpsRequest(QiDianConstant.COMPONENT_ACCESS_TOKEN_URL,
-                jsonParam.toJSONString(), "post");
-        return JSONObject.parseObject(result);
-    }
 }

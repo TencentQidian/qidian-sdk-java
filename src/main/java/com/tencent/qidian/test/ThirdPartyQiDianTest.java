@@ -33,9 +33,11 @@ public class ThirdPartyQiDianTest {
 	 */
 	@Before
 	public void getComponentAccessToken() throws Exception {
-		Map<String, Object> tickets = new ThirdPartyQiDianUtil().getVerifyTicket(encodingAesKey, token, signature.toString(),
-				timestamp, nonce, xmlText.toString());
-		ticket = tickets.get("ComponentVerifyTicket").toString();
+        CommonUtil commonUtil = new CommonUtil();
+        Map<String, Object> tickets = commonUtil.getVerifyTicket(encodingAesKey, token, signature.toString(),
+                timeStamp, nonce, xmlText.toString());
+        ticket = tickets.get("ComponentVerifyTicket").toString();
+
 		assert (ticket != null) : "ticket为null";
 		String componentAppSecret = "rc9SdaLtEMOGvPn0";
 		JSONObject jsonObject = new ThirdPartyQiDianUtil().getComponentAccessToken(appId, componentAppSecret, ticket);
